@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "615868022923",
+    "project_id": "venom-todo-app",
+    "storage_bucket": "venom-todo-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:615868022923:android:9041733460e7c15b40d48e",
+        "android_client_info": {
+          "package_name": "com.example.todo_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3f6mNUhT1dbAxiFROw2_5X38nyLmzpxQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
