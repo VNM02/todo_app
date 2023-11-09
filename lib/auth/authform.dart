@@ -58,6 +58,7 @@ UserCredential result;
             {
               result = await _auth.signInWithEmailAndPassword(email: email, password: password);
             }
+          Navigator.push(context,MaterialPageRoute(builder: (context)=>Home()));
         }
         on FirebaseAuthException catch  (e) {
           print('Failed with error code am here : ${e.code}');
@@ -165,7 +166,7 @@ UserCredential result;
                           onPressed: (){
                             print('Email'+email.toString()+password+password.toString());
                             authenticate();
-                            Navigator.push(context,MaterialPageRoute(builder: (context)=>Home()));
+
                           },
                           child:isSignUp?const Text('SignUp',style:TextStyle(
                             fontWeight: FontWeight.bold,

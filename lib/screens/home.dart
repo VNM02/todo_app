@@ -12,7 +12,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   @override
-  String uid='';
+  String uid=' ';
   final FirebaseAuth _auth=FirebaseAuth.instance;
   void initState() {
   getid();
@@ -58,12 +58,14 @@ class _HomeState extends State<Home> {
           builder: (context,snapshot){
             if(snapshot.connectionState==ConnectionState.waiting)
               {
-                return Container(
+                return Center(
+                  child: Container(
 
-                  height: 10,
-                  width: 10,
-                  child: CircularProgressIndicator(
-                    
+                    height: 10,
+                    width: 10,
+                    child: CircularProgressIndicator(
+
+                    ),
                   ),
                 );
               }
