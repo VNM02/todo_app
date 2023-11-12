@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:todo_app/auth/login/login_page.dart';
+import 'package:todo_app/auth/signup/signup_page.dart';
 import 'package:todo_app/screens/home.dart';
 
 class AuthForm extends StatefulWidget {
@@ -67,6 +69,7 @@ UserCredential result;
 
 
   }
+  
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -77,121 +80,157 @@ UserCredential result;
               Container(
                 child: Image.asset('assets/todo.png'),
               ),
+            SizedBox(
+              height:50.0,
+            ),
             Container(
               padding: const EdgeInsets.all(10.0),
-                child: Form(
-                  key:_formKey,
-                  child: Column(
+                // child: Form(
+                //   key:_formKey,
+                //   child: Column(
+                //
+                //     children:<Widget>[
+                //       if(isSignUp==true)
+                //           TextFormField(
+                //             keyboardType: TextInputType.text,
+                //             decoration: InputDecoration(
+                //               labelText: 'Username',
+                //               border: OutlineInputBorder(
+                //                 borderRadius: BorderRadius.circular(20.0),
+                //               ),
+                //             ),
+                //
+                //             key: const ValueKey('username'),
+                //             validator: (value) {
+                //               if (value == null || value.isEmpty ||
+                //                   value.length < 5) {
+                //                 return 'Username length is less than 5!!!';
+                //               }
+                //               return null;
+                //             },
+                //             onChanged: (value){
+                //               setState(() {
+                //                 username=value;
+                //               });
+                //             },
+                //           ),
+                //
+                //           const SizedBox(height: 10.0),
+                //           TextFormField(
+                //             keyboardType: TextInputType.emailAddress,
+                //             decoration: InputDecoration(
+                //               labelText: 'E-Mail',
+                //               border: OutlineInputBorder(
+                //                 borderRadius: BorderRadius.circular(20.0),
+                //               ),
+                //             ),
+                //
+                //             key: const ValueKey('email'),
+                //             validator: (value){
+                //               if(value==null || value.isEmpty || !value.contains('@'))
+                //                 {
+                //                   return 'Enter E-Mail in proper format!!!';
+                //                 }
+                //               return null;
+                //             },
+                //             onChanged: (value){
+                //               setState(() {
+                //                 email=value;
+                //               });
+                //             },
+                //           ),
+                //       const SizedBox(height: 10.0),
+                //       TextFormField(
+                //         obscureText: true,
+                //         keyboardType: TextInputType.visiblePassword,
+                //         decoration: InputDecoration(
+                //           labelText: 'Password',
+                //           border: OutlineInputBorder(
+                //             borderRadius: BorderRadius.circular(20.0),
+                //           ),
+                //         ),
+                //
+                //         key: const ValueKey('password'),
+                //         validator: (value){
+                //           if(value==null || value.isEmpty || value.length<5)
+                //           {
+                //             return 'Password length is less than 8!!!';
+                //           }
+                //           return null;
+                //         },
+                //         onChanged: (value){
+                //           setState(() {
+                //             password=value;
+                //           });
+                //         },
+                //       ),
+                //     const SizedBox(height: 10.0),
+                //     SizedBox(
+                //       width: double.infinity,
+                //       //decoration: BoxDecoration(),
+                //       child: ElevatedButton(
+                //           onPressed: (){
+                //             print('Email'+email.toString()+password+password.toString());
+                //             authenticate();
+                //
+                //           },
+                //           child:isSignUp?const Text('SignUp',style:TextStyle(
+                //             fontWeight: FontWeight.bold,
+                //             fontSize: 30.0,
+                //           )):const Text('Login',style:TextStyle(
+                //             fontWeight: FontWeight.bold,
+                //             fontSize: 30.0,
+                //           ),
+                //       ),
+                //       ),
+                //     ),
+                //       const SizedBox(height: 10.0),
+                //       Container(
+                //        child: TextButton(
+                //          onPressed: (){
+                //            setState(() {
+                //              isSignUp=!isSignUp;
+                //            });
+                //          },
+                //          child:isSignUp?const Text('Already a member?'):const Text('Join Todo?'),
+                //        ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
 
-                    children:<Widget>[
-                      if(isSignUp==true)
-                          TextFormField(
-                            keyboardType: TextInputType.text,
-                            decoration: InputDecoration(
-                              labelText: 'Username',
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                            ),
-
-                            key: const ValueKey('username'),
-                            validator: (value) {
-                              if (value == null || value.isEmpty ||
-                                  value.length < 5) {
-                                return 'Username length is less than 5!!!';
-                              }
-                              return null;
-                            },
-                            onChanged: (value){
-                              setState(() {
-                                username=value;
-                              });
-                            },
-                          ),
-
-                          const SizedBox(height: 10.0),
-                          TextFormField(
-                            keyboardType: TextInputType.emailAddress,
-                            decoration: InputDecoration(
-                              labelText: 'E-Mail',
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                            ),
-
-                            key: const ValueKey('email'),
-                            validator: (value){
-                              if(value==null || value.isEmpty || !value.contains('@'))
-                                {
-                                  return 'Enter E-Mail in proper format!!!';
-                                }
-                              return null;
-                            },
-                            onChanged: (value){
-                              setState(() {
-                                email=value;
-                              });
-                            },
-                          ),
-                      const SizedBox(height: 10.0),
-                      TextFormField(
-                        obscureText: true,
-                        keyboardType: TextInputType.visiblePassword,
-                        decoration: InputDecoration(
-                          labelText: 'Password',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      child: Text('SignUp',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 30.0,
                         ),
-
-                        key: const ValueKey('password'),
-                        validator: (value){
-                          if(value==null || value.isEmpty || value.length<5)
-                          {
-                            return 'Password length is less than 8!!!';
-                          }
-                          return null;
-                        },
-                        onChanged: (value){
-                          setState(() {
-                            password=value;
-                          });
-                        },
                       ),
-                    const SizedBox(height: 10.0),
-                    SizedBox(
-                      width: double.infinity,
-                      //decoration: BoxDecoration(),
-                      child: ElevatedButton(
-                          onPressed: (){
-                            print('Email'+email.toString()+password+password.toString());
-                            authenticate();
-
-                          },
-                          child:isSignUp?const Text('SignUp',style:TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 30.0,
-                          )):const Text('Login',style:TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 30.0,
-                          ),
-                      ),
-                      ),
+                      onPressed: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>SignUp()));
+                      },
                     ),
-                      const SizedBox(height: 10.0),
-                      Container(
-                       child: TextButton(
-                         onPressed: (){
-                           setState(() {
-                             isSignUp=!isSignUp;
-                           });
-                         },
-                         child:isSignUp?const Text('Already a member?'):const Text('Join Todo?'),
-                       ),
-                      ),
-                    ],
                   ),
-                ),
+                  SizedBox(height: 10.0),
+                  Container(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      child: Text('LogIn',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 30.0,
+                        ),),
+                      onPressed: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>LogIn()));
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
             ],
           ),
